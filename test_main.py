@@ -10,7 +10,7 @@ def test_hello():
 
 
 def test_add_positive_numbers():
-    response = client.get("/add/2/3")
+    response = client.get("/add/12/3")
     assert response.status_code == 200
     assert response.json() == {"result": 5}
 
