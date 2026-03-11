@@ -1,0 +1,21 @@
+    services:
+      app:
+        image: ghcr.io/witmar/my-first_cicd:latest  # Obraz pobrany z GitHub Container Registry
+        ports:
+          - "80:80"                        # Mapowanie portu hosta na port kontenera
+        environment:
+          - DATABASE_URL=postgresql://user:Praktyczne2026@db:5432/mydb
+        depends_on:
+          - db                             # Kontener app uruchomi się dopiero po db
+
+      db:
+        image: postgres:15                 # Gotowy obraz PostgreSQL z Docker Hub
+        environment:
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: Praktyczne2026
+          POSTGRES_DB: mydb
+        volumes:
+          - postgres_data:/var/lib/postgresql/data  # Trwałe przechowywanie danych
+
+    volumes:
+      postgres_data:                       # Definicja woluminu
